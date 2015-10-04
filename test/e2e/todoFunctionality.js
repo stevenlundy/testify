@@ -48,7 +48,7 @@ casper.test.begin('Removes todo items', function suite(test) {
     });
     test.assertExists('button.todo-remove', 'button to remove item is found');
     this.click('button.todo-remove');
-  })
+  });
 
   casper.then(function() {
     var newTodos = this.evaluate(function() {
@@ -57,6 +57,50 @@ casper.test.begin('Removes todo items', function suite(test) {
     test.assertEquals(newTodos, oldTodos-1);
   });
 
+  casper.run(function() {
+    test.done();
+  });
+});
+
+casper.test.begin('Adds and removes multiple todo items', function suite(test) {
+  var oldTodos;
+  casper.start('http://localhost:3000/', function() {
+    oldTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertExists('form', 'main form is found');
+    this.fill('form', {
+      todo: 'testTodo'
+    }, true);
+  });
+
+  casper.then(function() {
+    this.fill('form', {
+      todo: 'testTodo'
+    }, true);
+  })
+
+  casper.then(function() {
+    var newTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertEquals(newTodos, oldTodos+2);
+  });
+
+  casper.then(function() {
+    this.click('button.todo-remove');
+  });
+  casper.then(function() {
+    this.click('button.todo-remove');
+  });
+
+  casper.then(function() {
+    var newTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertEquals(newTodos, oldTodos);
+  });
+  
   casper.run(function() {
     test.done();
   });

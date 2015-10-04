@@ -35,4 +35,11 @@ describe('the todo.util methods', function() {
       expect(todo.util.isValidTodoName('1      ')).to.equal(false);
     });
   });
+  describe('the getUniqueId method', function () {
+    it('should not return the same number twice', function () {
+      var id1 = todo.util.getUniqueId();
+      var id2 = todo.util.getUniqueId();
+      expect(id1).to.not.equal(id2);
+    });
+  });
 });

@@ -105,3 +105,31 @@ casper.test.begin('Adds and removes multiple todo items', function suite(test) {
     test.done();
   });
 });
+
+casper.test.begin('Marks items as done', function suite(test) {
+  var doneTodos;
+  casper.start('http://localhost:3000/', function() {
+    doneTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item--done').length;
+    });
+    test.assertExists('form', 'main form is found');
+    this.fill('form', {
+      todo: 'testTodo'
+    }, true);
+  });
+
+  casper.then(function() {
+    this.click('.todo-item button.todo-done');
+  });
+
+  casper.then(function() {
+    var newDoneTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item--done').length;
+    });
+    test.assertEquals(newDoneTodos, doneTodos+1);
+  });
+
+  casper.run(function() {
+    test.done();
+  });
+});

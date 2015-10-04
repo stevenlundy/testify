@@ -10,4 +10,26 @@ casper.test.begin('App is setup correctly', 2, function suite(test) {
   });
 });
 
+casper.test.begin('Adds todo items', function suite(test) {
+  var oldTodos;
+  casper.start('http://localhost:3000/', function() {
+    oldTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertExists('form', 'main form is found');
+    this.fill('form', {
+        todo: 'testTodo'
+    }, true);
+  });
 
+  casper.then(function() {
+    var newTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertEquals(oldTodos+1, newTodos);
+  });
+
+  casper.run(function() {
+    test.done();
+  });
+});

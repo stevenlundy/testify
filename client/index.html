@@ -16,7 +16,11 @@
     <script type="text/javascript">
       // _phantom is undefined unless this is running under phantom.js as part
       // of the tests.
-      todo.init(_phantom);
+      if(typeof _phantom !== 'undefined'){
+        todo.init(_phantom);    
+      } else {
+        todo.init();
+      }
     </script>
   </body>
 </html>

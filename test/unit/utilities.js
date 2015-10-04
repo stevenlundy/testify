@@ -16,8 +16,8 @@ describe('the todo.App', function() {
 describe('the todo.util methods', function() {
   describe('the trimTodoName funciton', function () {
     it('should remove extra whitespace', function () {
-      expect(todo.util.trimTodoName('    Leading space')).to.equal('Leading space');
-      expect(todo.util.trimTodoName('Trailing space    ')).to.equal('Trailing space');
+      expect(todo.util.trimTodoName('    Leading space')).to.have.length(13);
+      expect(todo.util.trimTodoName('Trailing space    ')).to.have.length(14);
     });
     it('should not modify inner whitespace', function () {
       expect(todo.util.trimTodoName('Inner     space')).to.equal('Inner     space');

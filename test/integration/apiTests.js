@@ -2,7 +2,16 @@ describe('API integration', function(){
   var server, setupStub, JSONresponse;
 
   JSONresponse = {
-    todos: ['Write Tests', 'Profit']
+    todos: [
+      {
+        name: 'Write Tests',
+        done: true
+      },
+      {
+        name: 'Profit',
+        done: false
+      }
+    ]
   };
 
   before(function () {

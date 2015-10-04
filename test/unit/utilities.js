@@ -19,5 +19,8 @@ describe('the todo.util methods', function() {
       expect(todo.util.trimTodoName('    Leading space')).to.equal('Leading space');
       expect(todo.util.trimTodoName('Trailing space    ')).to.equal('Trailing space');
     });
+    it('should not modify inner whitespace', function () {
+      expect(todo.util.trimTodoName('Inner     space')).to.equal('Inner     space');
+    });
   });
 });

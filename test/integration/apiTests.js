@@ -13,12 +13,12 @@ describe('API integration', function(){
   });
 
   after(function () {
-    todo.api.restore();
+    todo.api.sendRequest.restore();
     todo.setup.restore();
   });
 
   it('todo.setup receives an array of todos when todo.init is called', function () {
     todo.init();
-    expect(setupStub.called).to.be(true);
+    expect(setupStub.called).to.equal(true);
   });
 });

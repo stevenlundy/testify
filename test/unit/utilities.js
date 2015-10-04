@@ -27,5 +27,9 @@ describe('the todo.util methods', function() {
     it('should return a boolean', function () {
       assert.typeOf(todo.util.isValidTodoName('todo'), 'boolean');
     });
+    it('should not accept items with fewer than 2 non-space characters', function () {
+      expect(todo.util.isValidTodoName('')).to.not.equal(true);
+      expect(todo.util.isValidTodoName('1      ')).to.not.equal(true);
+    });
   });
 });

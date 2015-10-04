@@ -133,3 +133,27 @@ casper.test.begin('Marks items as done', function suite(test) {
     test.done();
   });
 });
+
+casper.test.begin('Cannot add blank todos', function suite(test) {
+  var oldTodos;
+  casper.start('http://localhost:3000/', function() {
+    oldTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertExists('form', 'main form is found');
+    this.fill('form', {
+      todo: ''
+    }, true);
+  });
+
+  casper.then(function() {
+    var newTodos = this.evaluate(function() {
+      return __utils__.findAll('.todo-item').length;
+    });
+    test.assertEquals(newTodos, oldTodos);
+  });
+
+  casper.run(function() {
+    test.done();
+  });
+});

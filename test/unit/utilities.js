@@ -6,6 +6,9 @@ describe('the todo.App', function() {
   describe('the todo object', function() {
 
     it('should have all the necessary methods', function(){
+      expect(todo.util).to.have.property('trimTodoName');
+      expect(todo.util).to.have.property('isValidTodoName');
+      expect(todo.util).to.have.property('getUniqueId');
       todo.util.trimTodoName.should.be.a('function');
       todo.util.isValidTodoName.should.be.a('function');
       todo.util.getUniqueId.should.be.a('function');

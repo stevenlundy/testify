@@ -23,4 +23,9 @@ describe('the todo.util methods', function() {
       expect(todo.util.trimTodoName('Inner     space')).to.equal('Inner     space');
     });
   });
+  describe('the isValidTodoName method', function () {
+    it('should return a boolean', function () {
+      assert.typeOf(todo.util.isValidTodoName('todo'), 'boolean');
+    });
+  });
 });
